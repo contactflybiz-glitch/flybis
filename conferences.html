@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conferences &amp; Conclaves — FlyBiz</title>
+<meta name="description" content="Aviation leadership summits, student meets and expert panels from FlyBiz.">
+<style>
+/* ============================================================
+   FLYBIZ — Aviation Services & Solutions
+   Design system: airport wayfinding + departure-board vernacular
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+:root {
+  /* Color */
+  --navy: #0A1F44;
+  --navy-2: #123163;
+  --navy-3: #1C4586;
+  --red: #C8102E;
+  --red-dark: #93081F;
+  --white: #FFFFFF;
+  --grey-50: #F6F7F9;
+  --grey-100: #EDEFF3;
+  --grey-300: #D3D8E0;
+  --steel: #5C6B7E;
+  --ink: #0C1420;
+
+  /* Type */
+  --f-display: 'Barlow Condensed', sans-serif;
+  --f-body: 'Inter', sans-serif;
+  --f-mono: 'IBM Plex Mono', monospace;
+
+  /* Layout */
+  --container: 1180px;
+  --radius: 2px;
+  --nav-h: 76px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--f-body);
+  color: var(--ink);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.55;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, h4 {
+  font-family: var(--f-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1.05;
+  margin: 0;
+}
+p { margin: 0; }
+.container { max-width: var(--container); margin: 0 auto; padding: 0 28px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+/* ---------- Eyebrow / kicker (route-code style) ---------- */
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--f-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.kicker::before {
+  content: "";
+  width: 22px;
+  height: 1px;
+  background: var(--red);
+}
+
+/* ---------- Top utility bar ---------- */
+.utility-bar {
+  background: var(--navy);
+  color: var(--grey-300);
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.03em;
+}
+.utility-bar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 34px;
+}
+.utility-bar a { color: var(--grey-300); }
+.utility-bar a:hover { color: var(--white); }
+.utility-bar .ub-links { display: flex; gap: 20px; }
+
+/* ---------- Nav ---------- */
+.navbar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--white);
+  border-bottom: 1px solid var(--grey-300);
+  height: var(--nav-h);
+}
+.navbar .container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: 26px;
+  letter-spacing: 0.02em;
+  color: var(--navy);
+}
+.brand .brand-mark {
+  width: 34px; height: 34px;
+  background: var(--red);
+  display: flex; align-items: center; justify-content: center;
+  border-radius: var(--radius);
+  transform: skew(-8deg);
+}
+.brand .brand-mark svg { width: 18px; height: 18px; transform: skew(8deg); }
+.brand small {
+  display: block;
+  font-family: var(--f-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--steel);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  list-style: none;
+  margin: 0; padding: 0;
+}
+.nav-links a {
+  font-family: var(--f-display);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--navy);
+  position: relative;
+  padding: 6px 0;
+}
+.nav-links a.active { color: var(--red); }
+.nav-links a::after {
+  content: "";
+  position: absolute; left: 0; right: 100%; bottom: 0;
+  height: 2px; background: var(--red);
+  transition: right .25s ease;
+}
+.nav-links a:hover::after, .nav-links a.active::after { right: 0; }
+
+.nav-cta {
+  font-family: var(--f-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  background: var(--navy);
+  color: var(--white) !important;
+  padding: 11px 20px;
+  border-radius: var(--radius);
+  transition: background .2s ease;
+}
+.nav-cta:hover { background: var(--red); }
+
+.nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+.nav-toggle span { display: block; width: 24px; height: 2px; background: var(--navy); margin: 5px 0; }
+
+@media (max-width: 980px) {
+  .nav-links { position: fixed; top: var(--nav-h); left: 0; right: 0; bottom: 0;
+    background: var(--white); flex-direction: column; padding: 30px 28px; gap: 22px;
+    transform: translateX(100%); transition: transform .3s ease; overflow-y: auto; }
+  .nav-links.open { transform: translateX(0); }
+  .nav-cta { margin-top: 10px; text-align: center; }
+  .nav-toggle { display: block; }
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  background: var(--navy);
+  color: var(--white);
+  overflow: hidden;
+  padding: 90px 0 0;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(10,31,68,.55) 0%, rgba(10,31,68,.88) 65%, var(--navy) 100%),
+    radial-gradient(ellipse at 75% 20%, rgba(200,16,46,0.18), transparent 55%);
+  z-index: 0;
+}
+.hero .container { position: relative; z-index: 2; }
+.hero-inner { max-width: 760px; padding-bottom: 70px; }
+.hero .kicker { color: #FF6B7F; }
+.hero .kicker::before { background: #FF6B7F; }
+.hero h1 {
+  font-size: clamp(40px, 6vw, 74px);
+  margin: 18px 0 22px;
+}
+.hero h1 em { color: var(--red); font-style: normal; }
+.hero p.lede {
+  font-family: var(--f-body);
+  font-size: 18px;
+  color: #C7D0E0;
+  max-width: 560px;
+  margin-bottom: 34px;
+}
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 15px 26px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform .15s ease, background .2s ease, color .2s ease, border-color .2s ease;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-primary { background: var(--red); color: var(--white); }
+.btn-primary:hover { background: var(--red-dark); }
+.btn-outline { background: transparent; color: var(--white); border-color: rgba(255,255,255,.4); }
+.btn-outline:hover { border-color: var(--white); }
+.btn-navy { background: var(--navy); color: var(--white); }
+.btn-navy:hover { background: var(--navy-2); }
+.btn-block { width: 100%; justify-content: center; }
+
+/* ---------- Flight route line (signature motif) ---------- */
+.route-line {
+  position: relative; z-index: 2;
+  border-top: 1px solid rgba(255,255,255,.18);
+  padding: 20px 0;
+}
+.route-line .container { display: flex; align-items: center; gap: 18px; }
+.route-pt { font-family: var(--f-mono); font-size: 13px; color: var(--white); letter-spacing: .05em; white-space: nowrap; }
+.route-pt small { display: block; color: #8FA0BE; font-size: 10px; letter-spacing: .12em; }
+.route-track { flex: 1; position: relative; height: 2px; background: repeating-linear-gradient(90deg, rgba(255,255,255,.35) 0 10px, transparent 10px 20px); }
+.route-plane { position: absolute; top: 50%; left: 0; transform: translate(-50%,-50%); width: 22px; height: 22px; color: var(--red); animation: fly 5s linear infinite; }
+@keyframes fly { 0% { left: 0%; } 100% { left: 100%; } }
+
+/* ---------- Departure-board stats ---------- */
+.board {
+  background: var(--ink);
+  padding: 0;
+}
+.board-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.board-cell {
+  padding: 30px 24px;
+  border-right: 1px solid rgba(255,255,255,.08);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.board-cell:last-child { border-right: none; }
+.board-num {
+  font-family: var(--f-mono);
+  font-weight: 600;
+  font-size: clamp(28px, 3.4vw, 40px);
+  color: #4CFF7A;
+  letter-spacing: 0.02em;
+}
+.board-label {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #93A2B8;
+  margin-top: 8px;
+}
+@media (max-width: 760px) {
+  .board-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ---------- Section basics ---------- */
+section { padding: 96px 0; }
+.section-head { max-width: 640px; margin-bottom: 52px; }
+.section-head h2 { font-size: clamp(30px, 4vw, 44px); margin-top: 14px; color: var(--navy); }
+.section-head p { color: var(--steel); font-size: 17px; margin-top: 16px; }
+.bg-grey { background: var(--grey-50); }
+.bg-navy { background: var(--navy); color: var(--white); }
+.bg-navy .section-head h2 { color: var(--white); }
+.bg-navy .section-head p { color: #B9C4D8; }
+
+/* ---------- Priority program cards (Internship/Cert/Conference) ---------- */
+.priority-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--grey-300);
+  border: 1px solid var(--grey-300);
+}
+.priority-card {
+  background: var(--white);
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.priority-card .pc-rank {
+  font-family: var(--f-mono);
+  font-size: 12px;
+  color: var(--red);
+  letter-spacing: .1em;
+  margin-bottom: 18px;
+}
+.priority-card h3 {
+  font-size: 26px;
+  color: var(--navy);
+  margin-bottom: 14px;
+}
+.priority-card p {
+  color: var(--steel);
+  font-size: 15px;
+  margin-bottom: 24px;
+  flex: 1;
+}
+.priority-card .pc-link {
+  font-family: var(--f-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: .04em;
+  color: var(--navy);
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.priority-card.featured { background: var(--navy); }
+.priority-card.featured h3, .priority-card.featured .pc-rank { color: var(--white); }
+.priority-card.featured p { color: #B9C4D8; }
+.priority-card.featured .pc-link { color: var(--red); }
+.priority-card .pc-link svg { transition: transform .2s ease; }
+.priority-card:hover .pc-link svg { transform: translateX(4px); }
+
+@media (max-width: 900px) {
+  .priority-grid { grid-template-columns: 1fr; }
+}
+
+/* ---------- Generic content grid ---------- */
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
+@media (max-width: 900px) { .grid-3 { grid-template-columns: 1fr 1fr; } .grid-2 { grid-template-columns: 1fr; } }
+@media (max-width: 640px) { .grid-3 { grid-template-columns: 1fr; } }
+
+.info-card {
+  border: 1px solid var(--grey-300);
+  padding: 30px 26px;
+  background: var(--white);
+}
+.info-card .ic-num { font-family: var(--f-mono); color: var(--red); font-size: 13px; letter-spacing: .08em; margin-bottom: 14px; }
+.info-card h4 { font-size: 20px; color: var(--navy); margin-bottom: 10px; text-transform: none; }
+.info-card p { color: var(--steel); font-size: 14.5px; }
+
+/* ---------- Timeline / process (only used where order is real) ---------- */
+.process { display: flex; flex-direction: column; }
+.process-step { display: grid; grid-template-columns: 90px 1fr; gap: 24px; padding: 26px 0; border-top: 1px solid var(--grey-300); }
+.process-step:last-child { border-bottom: 1px solid var(--grey-300); }
+.process-step .ps-num { font-family: var(--f-mono); font-size: 30px; color: var(--grey-300); font-weight: 600; }
+.process-step h4 { font-size: 19px; color: var(--navy); margin-bottom: 8px; }
+.process-step p { color: var(--steel); font-size: 15px; }
+
+/* ---------- Placeholder image block ---------- */
+.ph-image {
+  background: var(--grey-100);
+  border: 1px dashed var(--grey-300);
+  color: var(--steel);
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  min-height: 220px;
+  padding: 20px;
+}
+
+/* ---------- CTA banner ---------- */
+.cta-banner {
+  background: var(--red);
+  color: var(--white);
+  padding: 64px 0;
+}
+.cta-banner .container { display: flex; align-items: center; justify-content: space-between; gap: 30px; flex-wrap: wrap; }
+.cta-banner h2 { font-size: clamp(26px, 3.6vw, 38px); }
+.cta-banner .btn-outline { border-color: rgba(255,255,255,.6); }
+
+/* ---------- Footer ---------- */
+footer { background: var(--ink); color: #93A2B8; padding: 70px 0 26px; }
+.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 50px; }
+.footer-grid h5 { font-family: var(--f-display); color: var(--white); font-size: 15px; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 18px; }
+.footer-grid ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.footer-grid a { font-size: 14.5px; }
+.footer-grid a:hover { color: var(--white); }
+.footer-brand p { font-size: 14px; margin-top: 14px; max-width: 280px; color: #7C8CA3; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,.08);
+  padding-top: 24px;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+  font-family: var(--f-mono); font-size: 12px; letter-spacing: .03em; color: #64748A;
+}
+@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .footer-grid { grid-template-columns: 1fr; } }
+
+/* ---------- Breadcrumb / page header (interior pages) ---------- */
+.page-head {
+  background: var(--navy);
+  color: var(--white);
+  padding: 60px 0 50px;
+  position: relative;
+  overflow: hidden;
+}
+.page-head::after {
+  content: "";
+  position: absolute; right: -60px; top: -60px; width: 260px; height: 260px;
+  border: 1px solid rgba(255,255,255,.08); border-radius: 50%;
+}
+.breadcrumb { font-family: var(--f-mono); font-size: 12px; color: #8FA0BE; letter-spacing: .05em; margin-bottom: 16px; }
+.breadcrumb a:hover { color: var(--white); }
+.page-head h1 { font-size: clamp(34px, 5vw, 54px); }
+.page-head p { color: #C7D0E0; margin-top: 14px; max-width: 620px; font-family: var(--f-body); font-size: 16.5px; }
+
+/* ---------- Form ---------- */
+.form-panel {
+  background: var(--white);
+  border: 1px solid var(--grey-300);
+  padding: 40px;
+}
+.form-panel h3 { color: var(--navy); font-size: 24px; margin-bottom: 8px; }
+.form-panel .form-sub { color: var(--steel); font-size: 14.5px; margin-bottom: 26px; }
+.field { margin-bottom: 20px; }
+.field label {
+  display: block;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--steel);
+  margin-bottom: 8px;
+}
+.field input, .field select, .field textarea {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid var(--grey-300);
+  background: var(--grey-50);
+  font-family: var(--f-body);
+  font-size: 15px;
+  color: var(--ink);
+  border-radius: var(--radius);
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: none;
+  border-color: var(--navy);
+  background: var(--white);
+}
+.field textarea { resize: vertical; min-height: 90px; }
+.form-note { font-size: 12.5px; color: var(--steel); margin-top: 14px; }
+.form-status { margin-top: 16px; font-family: var(--f-mono); font-size: 13px; display: none; padding: 12px 14px; border-radius: var(--radius); }
+.form-status.show { display: block; }
+.form-status.ok { background: #E6F7EC; color: #1B7A3D; border: 1px solid #B7E5C6; }
+.form-status.err { background: #FCE9EB; color: var(--red-dark); border: 1px solid #F3C0C7; }
+
+/* Focus visibility for a11y */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--red); outline-offset: 2px;
+}
+
+</style>
+</head>
+<body>
+
+<div class="utility-bar">
+  <div class="container">
+    <span>contactflybiz@gmail.com</span>
+    <div class="ub-links">
+      <a href="internships.html">Apply for Internship</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</div>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M2 16.5L22 9L20.5 6.5L2 11V16.5Z" fill="white"/><path d="M9 12L7 20L9.5 20.5L12.5 14L9 12Z" fill="white"/></svg></span>
+      <span>FLYBIZ<small>Aviation Services &amp; Solutions</small></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="internships.html">Internship &amp; Incubation</a></li>
+      <li><a href="certifications.html">Certifications</a></li>
+      <li><a href="conferences.html" class="active">Conferences &amp; Conclaves</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="internships.html" class="nav-cta">Apply Now</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<header class="page-head">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Home</a> / Conferences &amp; Conclaves</div>
+    <span class="kicker" style="color:#FF6B7F;">03</span>
+    <h1>Conferences &amp; Conclaves</h1>
+    <p>Leadership summits, faculty development conferences, student aviation meets and expert panels that connect emerging talent with industry decision-makers.</p>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">Formats</span>
+      <h2>How We Bring the Industry Together</h2>
+    </div>
+    <div class="grid-3">
+      <div class="info-card"><div class="ic-num">01</div><h4>Aviation Leadership Summits</h4><p>Senior industry leaders share strategy, trends and hiring priorities with partner institutions.</p></div>
+      <div class="info-card"><div class="ic-num">02</div><h4>Faculty Development Conferences</h4><p>Sessions to help educators align curricula with current industry practice.</p></div>
+      <div class="info-card"><div class="ic-num">03</div><h4>Student Aviation Meets</h4><p>Networking and case-study events designed specifically for students exploring aviation careers.</p></div>
+      <div class="info-card"><div class="ic-num">04</div><h4>Expert Talks &amp; Workshops</h4><p>Focused sessions on specific operational and technical topics led by practicing professionals.</p></div>
+      <div class="info-card"><div class="ic-num">05</div><h4>Panel Discussions</h4><p>Cross-industry panels on the future of airports, airlines and aviation technology.</p></div>
+      <div class="info-card"><div class="ic-num">06</div><h4>International Conclaves</h4><p>Larger gatherings held with FlyBiz's global university and industry partners.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-grey">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">Calendar</span>
+      <h2>Upcoming Events</h2>
+      <p>Full calendar and registration links will be published here as events are confirmed.</p>
+    </div>
+    <div class="grid-3">
+      <div class="ph-image">Placeholder — Upcoming Conference 1</div>
+      <div class="ph-image">Placeholder — Upcoming Conference 2</div>
+      <div class="ph-image">Placeholder — Upcoming Conference 3</div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner">
+  <div class="container">
+    <div>
+      <span class="kicker" style="color:rgba(255,255,255,.85)">Stay in the Loop</span>
+      <h2 style="margin-top:10px;">Want to Be Notified of the Next Conclave?</h2>
+    </div>
+    <a href="contact.html" class="btn btn-outline" style="background:var(--navy); border-color:var(--navy);">Contact Us</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="brand" style="color:white;">
+          <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none"><path d="M2 16.5L22 9L20.5 6.5L2 11V16.5Z" fill="white"/><path d="M9 12L7 20L9.5 20.5L12.5 14L9 12Z" fill="white"/></svg></span>
+          FLYBIZ
+        </span>
+        <p>Aviation services and solutions — internships, incubation, certification, research and global conferences.</p>
+      </div>
+      <div>
+        <h5>Programs</h5>
+        <ul>
+          <li><a href="internships.html">Internship &amp; Incubation</a></li>
+          <li><a href="certifications.html">Certifications</a></li>
+          <li><a href="conferences.html">Conferences &amp; Conclaves</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Company</h5>
+        <ul>
+          <li><a href="about.html">About FlyBiz</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Get in Touch</h5>
+        <ul>
+          <li><a href="mailto:contactflybiz@gmail.com">contactflybiz@gmail.com</a></li>
+          <li><a href="contact.html">Enquiry Form</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 FlyBiz Aviation Services &amp; Solutions. All rights reserved.</span>
+      <span>Internship / Certification / Conference / Incubation</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// FlyBiz shared behavior
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Mobile nav toggle
+  const toggle = document.querySelector('.nav-toggle');
+  const links = document.querySelector('.nav-links');
+  if (toggle && links) {
+    toggle.addEventListener('click', () => {
+      links.classList.toggle('open');
+    });
+    links.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => links.classList.remove('open'));
+    });
+  }
+
+  // Internship application form — sends to contactflybiz@gmail.com via FormSubmit relay
+  const form = document.getElementById('internship-form');
+  if (form) {
+    const status = document.getElementById('form-status');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = form.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+
+      const formData = new FormData(form);
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          status.textContent = 'Thank you — your application has been recorded and sent to our team. We will contact you on the mobile number provided.';
+          status.className = 'form-status show ok';
+          form.reset();
+        } else {
+          throw new Error('Relay error');
+        }
+      } catch (err) {
+        status.textContent = 'We could not confirm delivery just now. Please also reach us directly at contactflybiz@gmail.com, or try again in a moment.';
+        status.className = 'form-status show err';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Application';
+      }
+    });
+  }
+});
+
+</script>
+</body>
+</html>
